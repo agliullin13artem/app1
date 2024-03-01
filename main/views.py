@@ -4,11 +4,9 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'title': 'Home',
-        'content': 'Главная страница магазина -  HOME',
-        'list': ['first', 'second'],
-        'dict': {'first': 1},
-        'is_authenticated': True
+        'title': 'Home - Главная',
+        'content': 'Магазин мебели HOME',
+        
     }
 
 
@@ -16,4 +14,10 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse('About page')
+    content = {
+        'title': 'HOME - о нас',
+        'content': 'О нас',
+        'text_on_page': 'О том почему этот маганзин такой классный и какие в нем хорошие товары'
+    }
+
+    return render(request, 'main/about.html', content )
