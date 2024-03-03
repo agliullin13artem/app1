@@ -44,8 +44,8 @@
 
 
     
-    {% for product in goods%}
     <!-- Карта товара -->
+    {% for product in goods%}
      <div class="col-lg-4 col-md-6 p-4">
          <div class="card border-primary rounded custom-shadow">
 
@@ -56,7 +56,7 @@
             {% endif %}
 
              <div class="card-body">
-                 <a href="../goods/product.html">
+                 <a href="{% url "catalog:product" product.slug %}">
                      <p class="card-title">{{ product.name }}</p>
                  </a>
                  <p class="card-text text-truncate">{{ product.description }}</p>
