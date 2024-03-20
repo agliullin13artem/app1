@@ -1,6 +1,7 @@
 
 
 from urllib import response
+from django.contrib import sessions
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -29,6 +30,20 @@ def cart_add(request):
         else:
             Cart.objects.create(user=request.user, product=product, quantity=1)
             
+    else:
+        carts = Cart.objects.filter(
+            session_key=request.session.session_key, product=product)
+        
+        if carts.exists():
+            cart = carts.first()
+            if cart:
+                cart.quantity +=1
+                cart.save()
+
+        else:
+            Cart.objects.create(
+                session_key=request.session.session_key, product=product, quantity=1
+            )
     
     user_cart = get_user_carts(request)
     cart_items_html = render_to_string(
@@ -41,7 +56,7 @@ def cart_add(request):
     return JsonResponse(response_data)
 
 
-
+# изменение карзины
 def cart_change(request):
 
     cart_id = request.POST.get('cart_id')
@@ -64,17 +79,6 @@ def cart_change(request):
 
     return JsonResponse(response_data)
     
-
-
-
-
-
-
-
-
-
-
-
 
 # для удаления продуктов из корзины пользователя
 def cart_remove(request):
