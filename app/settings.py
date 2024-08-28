@@ -96,11 +96,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'home',
-        'USER': 'home',
+        'NAME': 'Shop',
+        'USER': 'Shop',
         'PASSWORD': '1234',
         'HOST': 'localhost',
-        'PORT': '5432',  
+        'PORT': '5432'
     }
 }
 
@@ -170,3 +170,6 @@ AUTH_USER_MODEL = 'users.User'
 
 # @login_requered
 LOGIN_URL = '/user/login/'
+
+
+LOGIN_REDIRECT_URL = '/'

@@ -1,5 +1,4 @@
 
-
 from urllib import response
 from django.contrib import sessions
 from django.http import JsonResponse
