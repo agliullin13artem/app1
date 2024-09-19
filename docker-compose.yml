@@ -1,0 +1,26 @@
+name: my-docker-project
+
+services:
+  app:
+  # Define the Docker image for your application
+    image: my-docker-images:latestimages
+    container_name: my-docker-container
+    ports:
+    - "8001:8000"
+    volumes:
+      -.:app
+      
+    postges:
+    # Define the Docker image for your application
+      image: postgres
+      container_name: my-postges-container
+      ports:
+      - "5432:5432"
+      environment:
+        - POSTGRES_DB=Shop
+        - POSTGRES_USER=Shop
+        - POSTGRES_PASSWORD=1234
+      restart: unless-stopped
+
+    
+    
